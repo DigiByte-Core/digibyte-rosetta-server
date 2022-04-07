@@ -1,7 +1,7 @@
 /* DigiByte Networks Params */
 
 const livenet = {
-  messagePrefix: '\x18Digibyte Mainnet Signed Message:\n',
+  messagePrefix: '\x19DigiByte Signed Message:\n',
   bech32: 'dgb',
   bip32: {
     public: 0x0488b21e,
@@ -31,7 +31,7 @@ const livenet = {
 };
 
 const testnet = {
-  messagePrefix: '\x18Digibyte Testnet Signed Message:\n',
+  messagePrefix: '\x19DigiByte Signed Message:\n',
   bech32: 'dgbt',
   bip32: {
     public: 0x043587cf,
@@ -43,7 +43,7 @@ const testnet = {
 };
 
 const regtest = {
-  messagePrefix: '\x18Digibyte Regtest Signed Message:\n',
+  messagePrefix: '\x19DigiByte Signed Message:\n',
   bech32: 'dgbrt',
   bip32: {
     public: 0x043587cf,
