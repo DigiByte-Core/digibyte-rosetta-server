@@ -1,37 +1,42 @@
-<p align="center">
-  <a href="https://www.rosetta-api.org">
-    <img width="90%" alt="Rosetta" src="docs/images/banner.png">
-  </a>
-</p>
-<h3 align="center">
-   DigiByte Rosetta Server (beta)
-</h3>
-<p align="center">
-	Node Version: 1.0.0<br>
-	Rosetta Version: 1.4.1
-</p>
-<p align="center">
-	DigiByte Rosetta Node offering a unified API according to the standard proposed by Coinbase.
-</p>
+![DigiByte Rosetta Server](./docs/images/banner.png)
 
-> This implementation is a Proof-of-Concept implementation for the [NodeJS Rosetta SDK](https://github.com/SmartArray/digibyte-rosetta-nodeapi/tree/1.4.1) developed by DigiByte
+# DigiByte Rosetta Server
+
+## Versions
+
+DigiByte Rosetta Server Version: 1.0.0
+
+Coinbase Rosetta Version: 1.4.1
+
+## About
+
+DigiByte Rosetta Server is a Dockerized implementation of the [Coinbase Rosetta Specification](https://www.rosetta-api.org/) written in the ubiquitous NodeJS framework to make it easier for the developer community to integrate with and build upon the DigiByte Blockchain.  To learn more about the specification and how you can integrate with it, view the full specifcation documentation [here](https://www.rosetta-api.org/docs/Reference.html).
 
 ## Prerequisites
+
 1. Install docker and git for your system
 
-## Docker Build Steps
-1. Clone the container using git
+### Docker Build Steps
+
+#### 1. Clone the container using git
+
 ```bash
-git clone https://github.com/SmartArray/digibyte-rosetta-server.git
+git clone https://github.com/DigiByte-Core/digibyte-rosetta-server.git
 ```
-2. Build the docker image
+
+#### 2. Build the docker image
+
+When building the docker image, a variety of build arguments are available.  Please review the available args in the [Dockerfile](./Dockerfile).  The following is an example of building the docker image for the DigiByte testnet.
+
 ```bash
 # Build the docker image for testnet (may take a while).
 # Other build args are documented in ./Dockerfile
 cd digibyte-rosetta-server
 docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 ```
-3. Start the docker container
+
+### 3. Start the docker container
+
 ```bash
 # This command will start the docker container.
 # In this example, docker will forward two ports: 8080, and 12026.
@@ -42,17 +47,17 @@ docker run -p 12026:12026 -p 8080:8080 digibyte/rosetta:latest
 ```
 
 ## Test
-Run `npm run test` in order to run js unit tests.
+
+Run `npm run test` in order to run the JavaScript unit tests.
+
 Run `npm run test-api` in order to test the data api and construction api in an online/offline environment built with docker-compose.
 
 Several example requests to test the reachability of your node using curl are shown in this document: [Example Requests](./docs/ExampleRequests.md).
 An example on how to validate a mainnet account balance is shown here: [Validation](./docs/Validation.md)
 
-## Current State
-Currently, only the [Rosetta Data API](https://www.rosetta-api.org/docs/data_api_introduction.html) is implemented by this node. The Construction API will be completed soon.
-
 ## Implementation Details
-This node implementation is using the experimental [Rosetta Node SDK](https://github.com/SmartArray/digibyte-rosetta-nodeapi/tree/1.4.1).
+
+This Rosetta implementation is using the [Rosetta Node SDK](https://github.com/DigiByte-Core/digibyte-rosetta-nodeapi.git).
 
 A UTXO-Indexing Middleware was implemented to enable balance lookups. Historical balance lookups are supported as well.
 By using the `Syncer` class of the Rosetta SDK, the sync has become exceptionally reliable and even reorgs are supported very well. LevelDB (the same database that is being used in Bitcoin and its forks) is used to store the UTXO data. A space efficient encoding was chosen in order to avoid redundancy and to save some disk space (usage: 6.7G, as of 08th September, 2020), as described [here](docs/utxoIndexer.md).
@@ -65,8 +70,10 @@ By using the `Syncer` class of the Rosetta SDK, the sync has become exceptionall
 Note, that the addition of an UTXO database is heavily discussed in the official Bitcoin Mailgroup. As soon as this feature is added, many altcoins will probably apply the changes too, and the above UTXO middleware will most likely become obsolete.
 
 ## ToDos
+
 - [x] Implement Construction API for Offline and Online Environments
 - [x] Test the node using coinbase's [rosetta-cli](https://github.com/coinbase/rosetta-cli.git) ([Results](docs/LivenetValidationResults.md))
 - [x] Run the mainnet node and wait for full sync
 - [x] Test some utxo balance checks ([Results](docs/Validation.md))
+- [ ] Update to the Coinbase Rosetta Specification version 1.4.12
 - [ ] Setup Continuous Integration
