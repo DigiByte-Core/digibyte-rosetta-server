@@ -1,20 +1,22 @@
-![DigiByte Rosetta Server](./docs/images/banner.png)
+# ![DigiByte Rosetta Server](./docs/images/banner.png)
 
-# DigiByte Rosetta Server
+## DigiByte Rosetta Server
 
-## Versions
+### Versions
 
 DigiByte Rosetta Server Version: 1.0.0
 
 Coinbase Rosetta Version: 1.4.1
 
-## About
+### About
 
 DigiByte Rosetta Server is a Dockerized implementation of the [Coinbase Rosetta Specification](https://www.rosetta-api.org/) written in the ubiquitous NodeJS framework to make it easier for the developer community to integrate with and build upon the DigiByte Blockchain.  To learn more about the specification and how you can integrate with it, view the full specifcation documentation [here](https://www.rosetta-api.org/docs/Reference.html).
 
-## Prerequisites
+### Prerequisites
 
-1. Install docker and git for your system
+1. Mac OS & Ubuntu are recommended operating systems.  Any Linux distrobution should work fine.
+
+1. Install Docker Desktop by following the instructions for either [MacOS](https://docs.docker.com/desktop/install/mac-install/) or [Ubuntu](https://docs.docker.com/desktop/install/linux-install/)
 
 ### Docker Build Steps
 
@@ -35,7 +37,9 @@ cd digibyte-rosetta-server
 docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 ```
 
-### 3. Start the docker container
+> NOTE: On linux operating systems, `sudo` may be required for any `docker build` commands.
+
+#### 3. Start the docker container
 
 ```bash
 # This command will start the docker container.
@@ -46,16 +50,23 @@ docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 docker run -p 12026:12026 -p 8080:8080 digibyte/rosetta:latest
 ```
 
-## Test
 
-Run `npm run test` in order to run the JavaScript unit tests.
+> NOTE: On linux operating systems, `sudo` may be required for any `docker run` commands.
 
-Run `npm run test-api` in order to test the data api and construction api in an online/offline environment built with docker-compose.
+### Test
+
+1. From the root of the cloned repository,run `npm install`
+
+2. Run `npm run test` in order to run the JavaScript unit tests.
+
+3. Run `npm run test-api` in order to test the data api and construction api in an online/offline environment built with docker-compose.
+
+> NOTE: On linux you may need to modify the above Node scripts to add `sudo` to any `docker` commands.
 
 Several example requests to test the reachability of your node using curl are shown in this document: [Example Requests](./docs/ExampleRequests.md).
 An example on how to validate a mainnet account balance is shown here: [Validation](./docs/Validation.md)
 
-## Implementation Details
+### Implementation Details
 
 This Rosetta implementation is using the [Rosetta Node SDK](https://github.com/DigiByte-Core/digibyte-rosetta-nodeapi.git).
 
@@ -69,7 +80,7 @@ By using the `Syncer` class of the Rosetta SDK, the sync has become exceptionall
 
 Note, that the addition of an UTXO database is heavily discussed in the official Bitcoin Mailgroup. As soon as this feature is added, many altcoins will probably apply the changes too, and the above UTXO middleware will most likely become obsolete.
 
-## ToDos
+### ToDos
 
 - [x] Implement Construction API for Offline and Online Environments
 - [x] Test the node using coinbase's [rosetta-cli](https://github.com/coinbase/rosetta-cli.git) ([Results](docs/LivenetValidationResults.md))
