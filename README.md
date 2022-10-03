@@ -28,7 +28,20 @@ git clone https://github.com/DigiByte-Core/digibyte-rosetta-server.git
 
 #### 2. Build the docker image
 
-When building the docker image, a variety of build arguments are available.  Please review the available args in the [Dockerfile](./Dockerfile).  The following is an example of building the docker image for the DigiByte testnet.
+When building the docker image, a variety of build arguments are available.  Please review the available args in the [Dockerfile](./Dockerfile).  
+
+##### DigiByte regtest
+
+```bash
+# Build the docker image for regtest (may take a while).
+# Other build args are documented in ./Dockerfile
+cd digibyte-rosetta-server
+docker build -t digibyte/rosetta:latest --build-arg use_regtest=1 .
+```
+
+##### DigiByte testnet
+
+> NOTE: At this time, testnet is intermitently available and will be resolved with the release of 8.22
 
 ```bash
 # Build the docker image for testnet (may take a while).
@@ -37,19 +50,50 @@ cd digibyte-rosetta-server
 docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 ```
 
+##### DigiByte mainnet
+
+```bash
+# Build the docker image for testnet (may take a while).
+# Other build args are documented in ./Dockerfile
+cd digibyte-rosetta-server
+docker build -t digibyte/rosetta:latest --build-arg use_testnet=0 .
+```
+
 > NOTE: On linux operating systems, `sudo` may be required for any `docker build` commands.
 
 #### 3. Start the docker container
 
+##### Start using DigiByte regtest
+
 ```bash
-# This command will start the docker container.
+# This command will start the docker container for regtest.
+# In this example, docker will forward two ports: 8080, and 18444.
+# Port 8080/tcp is the port of the rosetta api server.
+# Port 18444/tcp is the p2p regtest port.
+docker run -p 18444:18444 -p 8080:8080 digibyte/rosetta:latest
+```
+
+##### Start using DigiByte testnet
+
+> NOTE: At this time, testnet is intermitently available and will be resolved with the release of 8.22
+
+```bash
+# This command will start the docker container for testnet.
 # In this example, docker will forward two ports: 8080, and 12026.
 # Port 8080/tcp is the port of the rosetta api server.
 # Port 12026/tcp is the p2p testnet port.
-# If you are using mainnet, make sure you replace the port 12026 with 12024.
 docker run -p 12026:12026 -p 8080:8080 digibyte/rosetta:latest
 ```
 
+##### Start using DigiByte mainnet
+
+```bash
+# This command will start the docker container for mainnet use.
+# In this example, docker will forward two ports: 8080, and 12024.
+# Port 8080/tcp is the port of the rosetta api server.
+# Port 12024/tcp is the p2p mainnet port.
+docker run -p 12024:12024 -p 8080:8080 digibyte/rosetta:latest
+```
 
 > NOTE: On linux operating systems, `sudo` may be required for any `docker run` commands.
 
