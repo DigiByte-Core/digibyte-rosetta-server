@@ -30,7 +30,7 @@ git clone https://github.com/DigiByte-Core/digibyte-rosetta-server.git
 
 When building the docker image, a variety of build arguments are available.  Please review the available args in the [Dockerfile](./Dockerfile).  
 
-##### DigiByte regtest
+##### Build for DigiByte regtest
 
 ```bash
 # Build the docker image for regtest (may take a while).
@@ -39,7 +39,7 @@ cd digibyte-rosetta-server
 docker build -t digibyte/rosetta:latest --build-arg use_regtest=1 .
 ```
 
-##### DigiByte testnet
+##### Build for DigiByte testnet
 
 > NOTE: At this time, testnet is intermitently available and will be resolved with the release of 8.22
 
@@ -50,7 +50,7 @@ cd digibyte-rosetta-server
 docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 ```
 
-##### DigiByte mainnet
+##### Build for DigiByte mainnet
 
 ```bash
 # Build the docker image for testnet (may take a while).
