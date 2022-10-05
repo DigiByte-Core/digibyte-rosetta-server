@@ -36,7 +36,7 @@ When building the docker image, a variety of build arguments are available.  Ple
 # Build the docker image for regtest (may take a while).
 # Other build args are documented in ./Dockerfile
 cd digibyte-rosetta-server
-docker build -t digibyte/rosetta:latest --build-arg use_regtest=1 .
+docker build -t digibyte/rosetta:latest --build-arg use_regtest=1 --build-arg regtest_simulate_mining=1 --build-arg parallize_build=4 .
 ```
 
 ##### Build for DigiByte testnet
@@ -47,7 +47,7 @@ docker build -t digibyte/rosetta:latest --build-arg use_regtest=1 .
 # Build the docker image for testnet (may take a while).
 # Other build args are documented in ./Dockerfile
 cd digibyte-rosetta-server
-docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
+docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 --build-arg parallize_build=4 .
 ```
 
 ##### Build for DigiByte mainnet
@@ -56,7 +56,7 @@ docker build -t digibyte/rosetta:latest --build-arg use_testnet=1 .
 # Build the docker image for testnet (may take a while).
 # Other build args are documented in ./Dockerfile
 cd digibyte-rosetta-server
-docker build -t digibyte/rosetta:latest --build-arg use_testnet=0 .
+docker build -t digibyte/rosetta:latest --build-arg use_testnet=0 --build-arg parallize_build=4 .
 ```
 
 > NOTE: On linux operating systems, `sudo` may be required for any `docker build` commands.
