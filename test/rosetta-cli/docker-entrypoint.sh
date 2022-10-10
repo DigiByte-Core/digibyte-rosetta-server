@@ -75,7 +75,6 @@ cat << EOF > digibyte.conf
     "log_transactions": true,
     "log_balance_changes": true,
     "log_reconciliations": true,
-    "historical_balance_enabled": true,
     "reconciliation_disabled": false,
     "balance_tracking_disabled": false,
     "initial_balance_fetch_disabled": false,
